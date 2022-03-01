@@ -1,4 +1,4 @@
 FROM nginx:alpine
-COPY ./os.sh /
-RUN chmod +x /os.sh
-RUN sh os.sh
+COPY ./os-env.sh /
+RUN chmod +x /os-env.sh
+RUN sh os-env.sh
