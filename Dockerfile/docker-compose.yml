@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  app:
+    image: aqua2002/docker:1
+    restart: always
+    ports:
+      - "8080:80"
+  hello-java:
+    image: aqua2002/java-app:1
+    restart: unless-stopped
+    depends_on: 
+      - "psql-db"
+  psql-db:
+    image: mdillon/postgis:11
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5434:5432"
+volumes:
+  postgres:
